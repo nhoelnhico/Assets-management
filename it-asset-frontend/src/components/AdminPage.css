@@ -1,0 +1,78 @@
+/* src/components/AdminPage.css */
+
+.admin-page {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+}
+
+.admin-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.add-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #2ecc71;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-button:hover {
+    background-color: #27ae60;
+}
+
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.asset-table th,
+.asset-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.asset-table th {
+    background-color: #ecf0f1;
+    color: #34495e;
+    font-weight: 600;
+}
+
+.asset-table tr:hover {
+    background-color: #f1f3f5;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
