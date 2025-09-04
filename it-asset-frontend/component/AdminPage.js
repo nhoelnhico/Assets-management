@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { DownloadButton } from './AssetPDF'; // Import the DownloadButton component
+import { Link } from 'react-router-dom';
 import './AdminPage.css';
+import { DownloadButton } from './AssetPDF'; // Import the component
 
 const AdminPage = () => {
     const [assets, setAssets] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchAssets();
@@ -33,10 +32,6 @@ const AdminPage = () => {
                 console.error('Error deleting asset:', error);
             }
         }
-    };
-
-    const handleEdit = (asset) => {
-        navigate('/add-asset', { state: { assetData: asset } });
     };
 
     if (loading) return <div>Loading admin page...</div>;
@@ -65,16 +60,21 @@ const AdminPage = () => {
                             <td>{asset.laptop_tag_num || 'N/A'}</td>
                             <td>{asset.status}</td>
                             <td className="actions-cell">
-                                <button onClick={() => handleEdit(asset)} className="edit-btn">Edit</button>
-                                <button onClick={() => handleDelete(asset.id)} className="delete-btn">Delete</button>
+                             <button onClick={() => handleDelete(asset.id)} className="delete-btn">Delete</button>
                                 <DownloadButton asset={asset} />
                             </td>
+                            
                         </tr>
                     ))}
+                
+
                 </tbody>
             </table>
         </div>
     );
 };
 
+
+
 export default AdminPage;
+

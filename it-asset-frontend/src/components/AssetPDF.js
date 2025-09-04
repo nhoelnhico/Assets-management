@@ -1,60 +1,157 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
-        backgroundColor: '#E4E4E4',
+        backgroundColor: '#FFFFFF',
         padding: 30,
     },
-    section: {
-        margin: 10,
-        padding: 10,
-        flexGrow: 1,
-        backgroundColor: 'white',
-        border: '1px solid #ccc',
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+        borderBottom: '1px solid #E0E0E0',
+        paddingBottom: 10,
     },
-    heading: {
-        fontSize: 16,
-        marginBottom: 10,
+    logo: {
+        width: 150,
+        height: 50,
+    },
+    title: {
+        fontSize: 18,
         fontWeight: 'bold',
+        color: '#2C3E50',
+    },
+    section: {
+        marginBottom: 15,
+        border: '1px solid #DCDCDC',
+        borderRadius: 8,
+        padding: 15,
+    },
+    subHeading: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: '#34495E',
+        borderBottom: '1px solid #DCDCDC',
+        paddingBottom: 5,
+    },
+    fieldRow: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
+        marginBottom: 5,
+    },
+    field: {
+        fontSize: 11,
+        marginBottom: 5,
+        width: '50%',
     },
     label: {
-        fontSize: 12,
-        marginBottom: 5,
         fontWeight: 'bold',
+        marginRight: 5,
+        color: '#7F8C8D',
     },
     value: {
-        fontSize: 12,
-        marginBottom: 10,
+        color: '#2C3E50',
+    },
+    fullWidthField: {
+        fontSize: 11,
+        marginBottom: 5,
+    },
+    signatureSection: {
+        marginTop: 40,
+        borderTop: '1px solid #DCDCDC',
+        paddingTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    signatureBlock: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '30%',
+    },
+    signatureLine: {
+        width: '100%',
+        height: 1,
+        backgroundColor: '#000000',
+        marginTop: 40,
+    },
+    signatureText: {
+        fontSize: 10,
+        marginTop: 5,
     },
 });
 
 const AssetPDF = ({ asset }) => (
     <Document>
         <Page size="A4" style={styles.page}>
+            <View style={styles.header}>
+                <Image style={styles.logo} src="https://cdn.shopify.com/s/files/1/0742/8069/8157/files/Chromaesthetics_Inc._Logo_04022024_Horizontal_Lockup_4.png?v=1756965756" />
+                <Text style={styles.title}>IT Asset Clearance Form</Text>
+            </View>
+
             <View style={styles.section}>
-                <Text style={styles.heading}>IT Asset Clearance Form</Text>
-                
-                <Text style={styles.label}>Employee Details</Text>
-                <Text style={styles.value}>Employee ID: {asset.employee_id}</Text>
-                <Text style={styles.value}>Name: {asset.name}</Text>
-                <Text style={styles.value}>Position: {asset.position}</Text>
-                <Text style={styles.value}>Department: {asset.department}</Text>
-                <Text style={styles.value}>Email: {asset.email}</Text>
-                
-                <Text style={styles.label}>Laptop Details</Text>
-                <Text style={styles.value}>Laptop: {asset.laptop}</Text>
-                <Text style={styles.value}>Status: {asset.laptop_status}</Text>
-                <Text style={styles.value}>Tag #: {asset.laptop_tag_num}</Text>
-                
-                {/* Add the rest of the fields here similarly */}
-                
-                <Text style={styles.label}>Remarks</Text>
-                <Text style={styles.value}>{asset.remarks}</Text>
-                
-                <Text style={styles.label}>Clearance Status</Text>
-                <Text style={styles.value}>{asset.status}</Text>
+                <Text style={styles.subHeading}>Employee Information</Text>
+                <View style={styles.fieldRow}>
+                    <Text style={styles.field}><Text style={styles.label}>Date:</Text> <Text style={styles.value}>{asset.date}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Employee ID:</Text> <Text style={styles.value}>{asset.employee_id}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Name:</Text> <Text style={styles.value}>{asset.name}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Position:</Text> <Text style={styles.value}>{asset.position}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Department:</Text> <Text style={styles.value}>{asset.department}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Email:</Text> <Text style={styles.value}>{asset.email}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Company:</Text> <Text style={styles.value}>{asset.company}</Text></Text>
+                </View>
+            </View>
+
+            <View style={styles.section}>
+                <Text style={styles.subHeading}>IT Assets</Text>
+                <View style={styles.fieldRow}>
+                    <Text style={styles.field}><Text style={styles.label}>Laptop:</Text> <Text style={styles.value}>{asset.laptop}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Laptop Status:</Text> <Text style={styles.value}>{asset.laptop_status}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Laptop Tag #:</Text> <Text style={styles.value}>{asset.laptop_tag_num}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Company Phone:</Text> <Text style={styles.value}>{asset.company_phone}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Phone Status:</Text> <Text style={styles.value}>{asset.phone_status}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Phone Tag #:</Text> <Text style={styles.value}>{asset.phone_tag_num}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Company Desktop:</Text> <Text style={styles.value}>{asset.company_desktop}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Desktop Status:</Text> <Text style={styles.value}>{asset.desktop_status}</Text></Text>
+                    <Text style={styles.field}><Text style={styles.label}>Desktop Tag #:</Text> <Text style={styles.value}>{asset.desktop_tag_num}</Text></Text>
+                </View>
+            </View>
+
+            <View style={styles.section}>
+                <Text style={styles.subHeading}>Additional Information</Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Others:</Text> <Text style={styles.value}>{asset.others}</Text></Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Others Status:</Text> <Text style={styles.value}>{asset.others_status}</Text></Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Others Tag #:</Text> <Text style={styles.value}>{asset.others_tag_num}</Text></Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Software List:</Text> <Text style={styles.value}>{asset.software_list}</Text></Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Intended Use:</Text> <Text style={styles.value}>{asset.intended_use}</Text></Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Remarks:</Text> <Text style={styles.value}>{asset.remarks}</Text></Text>
+            </View>
+            
+            <View style={styles.section}>
+                <Text style={styles.subHeading}>Clearance Status</Text>
+                <Text style={styles.fullWidthField}><Text style={styles.label}>Status:</Text> <Text style={styles.value}>{asset.status}</Text></Text>
+            </View>
+        </Page>
+        
+        <Page size="A4" style={styles.page}>
+            <Text style={styles.title}>Clearance Signatures</Text>
+            <View style={styles.signatureSection}>
+                <View style={styles.signatureBlock}>
+                    <View style={styles.signatureLine}></View>
+                    <Text style={styles.signatureText}>Employee Name and Signature</Text>
+                </View>
+                <View style={styles.signatureBlock}>
+                    <View style={styles.signatureLine}></View>
+                    <Text style={styles.signatureText}>Noted By: (Name and Signature)</Text>
+                </View>
+                <View style={styles.signatureBlock}>
+                    <View style={styles.signatureLine}></View>
+                    <Text style={styles.signatureText}>Approved By: (Name and Signature)</Text>
+                </View>
             </View>
         </Page>
     </Document>
@@ -66,6 +163,6 @@ export const DownloadButton = ({ asset }) => (
         fileName={`asset-form-${asset.employee_id}.pdf`}
         style={{ textDecoration: 'none', padding: '10px', backgroundColor: '#007bff', color: 'white', borderRadius: '5px' }}
     >
-        {({ blob, url, loading, error }) => (loading ? 'Generating PDF...' : 'Download PDF')}
+        {({ loading }) => (loading ? 'Generating PDF...' : 'Download PDF')}
     </PDFDownloadLink>
 );
