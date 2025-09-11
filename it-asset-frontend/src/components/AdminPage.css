@@ -52,7 +52,7 @@
   background-color: #27ae60;
 }
 
-/* Accessibility focus styles */
+/* Accessibility focus styless */
 .actions-cell button:focus {
   outline: 3px solid rgba(52,152,219,0.18);
   outline-offset: 2px;
