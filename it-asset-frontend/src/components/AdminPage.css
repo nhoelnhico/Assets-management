@@ -1,78 +1,59 @@
-/* src/components/AdminPage.css */
-
-.admin-page {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 2.5rem;
+/* ---------- Action buttons base ---------- */
+.actions-cell button {
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: background-color 0.15s ease-in-out, transform 0.08s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.admin-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 1.5rem;
+/* ---------- Edit button ---------- */
+.actions-cell .edit-btn,
+.edit-btn {
+  background-color: #3498db;
+  color: #ffffff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+.actions-cell .edit-btn:hover,
+.edit-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
 }
 
-.add-button {
-    display: inline-block;
-    text-decoration: none;
-    background-color: #2ecc71;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.add-button:hover {
-    background-color: #27ae60;
-}
-
-.asset-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.asset-table th,
-.asset-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.asset-table th {
-    background-color: #ecf0f1;
-    color: #34495e;
-    font-weight: 600;
-}
-
-.asset-table tr:hover {
-    background-color: #f1f3f5;
-}
-
-.actions-cell {
-    display: flex;
-    gap: 0.5rem;
-}
-
+/* ---------- Delete button ---------- */
+.actions-cell .delete-btn,
 .delete-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s ease-in-out;
+  background-color: #e74c3c;
+  color: #ffffff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+.actions-cell .delete-btn:hover,
+.delete-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
 }
 
-.delete-btn:hover {
-    background-color: #c0392b;
+/* Optional: smaller download button style to match */
+.actions-cell .download-btn,
+.download-all-btn {
+  background-color: #2ecc71;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.45rem 0.8rem;
+}
+.actions-cell .download-btn:hover,
+.download-all-btn:hover {
+  background-color: #27ae60;
+}
+
+/* Accessibility focus styles */
+.actions-cell button:focus {
+  outline: 3px solid rgba(52,152,219,0.18);
+  outline-offset: 2px;
 }
