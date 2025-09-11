@@ -6,12 +6,15 @@ const SuppliesPage = () => {
   const [supplies, setSupplies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [showForm, setShowForm] = useState(false); // modal toggle
+
+  const [showForm, setShowForm] = useState(false); // add modal
+  const [showEditForm, setShowEditForm] = useState(false); // edit modal
   const [newSupply, setNewSupply] = useState({
     tag_name: "",
     device_name: "",
     status: "Available",
   });
+  const [editSupply, setEditSupply] = useState(null); // currently editing
 
   useEffect(() => {
     fetchSupplies();
@@ -39,25 +42,29 @@ const SuppliesPage = () => {
     }
   };
 
-  const handleEdit = async (supply) => {
-    const updatedStatus = prompt(
-      "Enter new status (Available, In Use, Broken):",
-      supply.status
-    );
-    if (updatedStatus) {
-      try {
-        await axios.put(`http://localhost:3001/api/supplies/${supply.id}`, {
-          ...supply,
-          status: updatedStatus,
-        });
-        fetchSupplies();
-      } catch (error) {
-        console.error("Error updating supply:", error);
-      }
+  // 🟢 Open edit form modal
+  const handleEdit = (supply) => {
+    setEditSupply({ ...supply });
+    setShowEditForm(true);
+  };
+
+  // 🟢 Save edited supply
+  const handleUpdateSupply = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(
+        `http://localhost:3001/api/supplies/${editSupply.id}`,
+        editSupply
+      );
+      fetchSupplies();
+      setShowEditForm(false);
+      setEditSupply(null);
+    } catch (error) {
+      console.error("Error updating supply:", error);
     }
   };
 
-  // 👉 Handle Add New Supply Submit
+  // 🟢 Handle Add New Supply Submit
   const handleAddSupply = async (e) => {
     e.preventDefault();
     try {
@@ -70,7 +77,7 @@ const SuppliesPage = () => {
     }
   };
 
-  // 👉 Download all to CSV
+  // 🟢 Download all to CSV
   const downloadAll = () => {
     const csvRows = [];
     const headers = ["Tag Name", "Device Name", "Status"];
@@ -216,6 +223,61 @@ const SuppliesPage = () => {
                   type="button"
                   className="btn btn-secondary"
                   onClick={() => setShowForm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Supply Modal */}
+      {showEditForm && editSupply && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Edit Supply</h2>
+            <form onSubmit={handleUpdateSupply} className="supply-form">
+              <label>Tag Name</label>
+              <input
+                type="text"
+                value={editSupply.tag_name}
+                onChange={(e) =>
+                  setEditSupply({ ...editSupply, tag_name: e.target.value })
+                }
+                required
+              />
+
+              <label>Device Name</label>
+              <input
+                type="text"
+                value={editSupply.device_name}
+                onChange={(e) =>
+                  setEditSupply({ ...editSupply, device_name: e.target.value })
+                }
+                required
+              />
+
+              <label>Status</label>
+              <select
+                value={editSupply.status}
+                onChange={(e) =>
+                  setEditSupply({ ...editSupply, status: e.target.value })
+                }
+              >
+                <option value="Available">Available</option>
+                <option value="In Use">In Use</option>
+                <option value="Broken">Broken</option>
+              </select>
+
+              <div className="form-actions">
+                <button type="submit" className="btn btn-primary">
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowEditForm(false)}
                 >
                   Cancel
                 </button>
